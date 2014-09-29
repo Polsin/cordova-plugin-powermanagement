@@ -15,7 +15,7 @@ Installation
 ---------
 Install the plugin using the cordova command line utility:
 
-`$ cordova plugin add https://github.com/Viras-/cordova-plugin-powermanagement.git`
+`$ cordova plugin add https://github.com/jimibi/cordova-plugin-powermanagement.git`
 
 License
 =======
