@@ -17,7 +17,9 @@
 /**
  * Cordova (Android) plugin for accessing the power-management functions of the device
  * @author Wolfgang Koller <viras@users.sourceforge.net>
+ * modifiée par Carole BRUNO pour réveil avec téléphone vérouillé le 14/05/2014
  */
+ 
 package org.apache.cordova.powermanagement;
 
 import org.json.JSONArray;
@@ -27,8 +29,8 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.util.Log;
 
-// mon import
-import android.app.KeyguardManager;
+
+import android.app.KeyguardManager;		// mon import
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -66,16 +68,21 @@ public class PowerManagement extends CordovaPlugin {
 
 		PluginResult result = null;
 		Log.d("PowerManagementPlugin", "Plugin execute called - " + this.toString() );
-		Log.d("PowerManagementPlugin", "Action is " + action );
+		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
 		
 		try {
 			if( action.equals("acquire") ) {
 					if( args.length() > 0 && args.getBoolean(0) ) {
 						Log.d("PowerManagementPlugin", "Only dim lock" );
-						result = this.acquire( PowerManager.SCREEN_DIM_WAKE_LOCK );
+						// ACQUIRE_CAUSES_WAKEUP pour réveiller le téléphone et enleve le verrouillage
+						result = this.acquire( PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP  );
+						this.myLock.disableKeyguard();
+
 					}
 					else {
-						result = this.acquire( PowerManager.FULL_WAKE_LOCK );
+						// ACQUIRE_CAUSES_WAKEUP pour réveiller le téléphone et enleve le verrouillage
+						result = this.acquire( PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP );
+						this.myLock.disableKeyguard();
 					}
 			}
 			else if( action.equals("release") ) {
@@ -141,7 +148,11 @@ public class PowerManagement extends CordovaPlugin {
 	 */
 	@Override
 	public void onPause(boolean multitasking) {
-		if( this.wakeLock != null ) this.wakeLock.release();
+		if( this.wakeLock != null ) {
+			this.wakeLock.release();
+			// ma fonction
+			this.myLock.reenableKeyguard();
+		}
 
 		super.onPause(multitasking);
 	}
@@ -151,7 +162,11 @@ public class PowerManagement extends CordovaPlugin {
 	 */
 	@Override
 	public void onResume(boolean multitasking) {
-		if( this.wakeLock != null ) this.wakeLock.acquire();
+		if( this.wakeLock != null ) {
+			this.wakeLock.acquire();
+			// ma fonction
+			this.myLock.disableKeyguard();
+		}
 
 		super.onResume(multitasking);
 	}
