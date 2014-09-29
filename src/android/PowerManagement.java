@@ -27,6 +27,8 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.util.Log;
 
+// mon import
+import android.app.KeyguardManager;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -41,6 +43,9 @@ public class PowerManagement extends CordovaPlugin {
 	// As we only allow one wake-lock, we keep a reference to it here
 	private PowerManager.WakeLock wakeLock = null;
 	private PowerManager powerManager = null;
+	// mes déclarations
+	private KeyguardManager myKeyGuard  = null;
+	private KeyguardManager.KeyguardLock myLock  = null;
 
 	/**
 	 * Fetch a reference to the power-service when the plugin is initialized
@@ -50,6 +55,9 @@ public class PowerManagement extends CordovaPlugin {
 		super.initialize(cordova, webView);
 		
 		this.powerManager = (PowerManager) cordova.getActivity().getSystemService(Context.POWER_SERVICE);
+		// mes déclarations
+		this.myKeyGuard = (KeyguardManager)cordova.getActivity().getSystemService(Context.KEYGUARD_SERVICE);
+		this.myLock = myKeyGuard.newKeyguardLock("tag");
 	}
 	
 	@Override
