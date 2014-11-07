@@ -12,19 +12,19 @@ For details on power functionality see:
 * WindowsPhone: [UserIdleDetectionMode](http://msdn.microsoft.com/en-US/library/windowsphone/develop/microsoft.phone.shell.phoneapplicationservice.useridledetectionmode%28v=vs.105%29.aspx)
 
 Installation
----------
+------------
 Install the plugin using the cordova command line utility:
 `$ cordova plugin add https://github.com/jimibi/cordova-plugin-powermanagement.git`
 
 Uninstall
 ---------
 Remove the plugin using the cordova command line utility:
-`$ cordova plugin rm fr-edps-cordova-powermanagement
+`$ cordova plugin rm fr-edps-cordova-powermanagement`
 
 Usage
----------
+-----
     sucAlert = function() {
-        alert('Succes');
+        alert('Success');
     };
     errAlert = function() {
         alert('Error');
