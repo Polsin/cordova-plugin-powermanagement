@@ -14,8 +14,23 @@ For details on power functionality see:
 Installation
 ---------
 Install the plugin using the cordova command line utility:
-
 `$ cordova plugin add https://github.com/jimibi/cordova-plugin-powermanagement.git`
+
+Uninstall
+---------
+Remove the plugin using the cordova command line utility:
+`$ cordova plugin rm fr-edps-cordova-powermanagement
+
+Usage
+---------
+    sucAlert = function() {
+        alert('Succes');
+    };
+    errAlert = function() {
+        alert('Error');
+    };
+    powerManagement.acquire(sucAlert, errAlert); // awake the smartphone
+    powerManagement.release(sucAlert, errAlert); // allowed to sleep again
 
 License
 =======
