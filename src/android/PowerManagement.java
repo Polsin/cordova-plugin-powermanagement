@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2014 Wolfgang Koller
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +12,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 /**
  * Cordova (Android) plugin for accessing the power-management functions of the device
  * @author Wolfgang Koller <viras@users.sourceforge.net>
  * modifiée par Carole BRUNO pour réveil avec téléphone vérouillé le 14/05/2014
- */
+ * modifiée par Jean Marc BRUNO pour mise à jour le 01/04/2015
+ **/
+
  
 package org.apache.cordova.powermanagement;
 
@@ -68,14 +70,14 @@ public class PowerManagement extends CordovaPlugin {
 
 		PluginResult result = null;
 		Log.d("PowerManagementPlugin", "Plugin execute called - " + this.toString() );
-		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
+		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.FLAG_KEEP_SCREEN_ON | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
 		
 		try {
 			if( action.equals("acquire") ) {
 					if( args.length() > 0 && args.getBoolean(0) ) {
 						Log.d("PowerManagementPlugin", "Only dim lock" );
 						// ACQUIRE_CAUSES_WAKEUP pour réveiller le téléphone et enleve le verrouillage
-						result = this.acquire( PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP  );
+						result = this.acquire( PowerManager.FLAG_KEEP_SCREEN_ON | PowerManager.ACQUIRE_CAUSES_WAKEUP  );
 						this.myLock.disableKeyguard();
 
 					}
