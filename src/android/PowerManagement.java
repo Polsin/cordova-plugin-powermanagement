@@ -71,14 +71,13 @@ public class PowerManagement extends CordovaPlugin {
 		PluginResult result = null;
 		Log.d("PowerManagementPlugin", "Plugin execute called - " + this.toString() );
 		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
-		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.FLAG_KEEP_SCREEN_ON | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
 		
 		try {
 			if( action.equals("acquire") ) {
 					if( args.length() > 0 && args.getBoolean(0) ) {
 						Log.d("PowerManagementPlugin", "Only dim lock" );
 						// ACQUIRE_CAUSES_WAKEUP pour réveiller le téléphone et enleve le verrouillage
-						result = this.acquire( PowerManager.FLAG_KEEP_SCREEN_ON | PowerManager.ACQUIRE_CAUSES_WAKEUP  );
+						result = this.acquire( PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP  );
 						this.myLock.disableKeyguard();
 
 					}
