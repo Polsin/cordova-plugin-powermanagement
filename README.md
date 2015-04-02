@@ -19,7 +19,7 @@ Install the plugin using the cordova command line utility:
 Uninstall
 ---------
 Remove the plugin using the cordova command line utility:
-`$ cordova plugin rm fr-edps-cordova-powermanagement`
+`$ cordova plugin rm fr.edps.cordova.powermanagement`
 
 Usage
 -----
