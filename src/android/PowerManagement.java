@@ -70,6 +70,7 @@ public class PowerManagement extends CordovaPlugin {
 
 		PluginResult result = null;
 		Log.d("PowerManagementPlugin", "Plugin execute called - " + this.toString() );
+		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
 		Log.d("PowerManagementPlugin", "Action is " + action + (PowerManager.FLAG_KEEP_SCREEN_ON | PowerManager.ACQUIRE_CAUSES_WAKEUP) + "key");
 		
 		try {
